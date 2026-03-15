@@ -53,7 +53,7 @@ async def _call_ollama(user_msg: str) -> dict | None:
     try:
         async with aiohttp.ClientSession() as session:
             async with session.post(
-                OLLAMA_URL, json=payload, timeout=aiohttp.ClientTimeout(total=60)
+                OLLAMA_URL, json=payload, timeout=aiohttp.ClientTimeout(total=120)
             ) as resp:
                 if resp.status != 200:
                     logger.warning(
