@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e8;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+    border-bottom: 1px solid #1a1a2e;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    color: #888;
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: #12121e;
+    border: 1px solid #1e1e32;
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+}
+
+.card-value {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e0e0e8;
+}
+
+.card-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
+}
+
+.card.positive .card-value { color: #4ade80; }
+.card.negative .card-value { color: #f87171; }
+
+/* Charts */
+.charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.chart-container {
+    background: #12121e;
+    border: 1px solid #1e1e32;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.chart-container h2 {
+    font-size: 1rem;
+    color: #999;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* Topics */
+.topics-section {
+    margin-bottom: 2rem;
+}
+
+.topics-section h2 {
+    font-size: 1rem;
+    color: #999;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.topic-tag {
+    background: #1a1a2e;
+    border: 1px solid #2a2a44;
+    border-radius: 20px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    color: #a78bfa;
+    cursor: default;
+}
+
+.topic-tag .count {
+    color: #555;
+    font-size: 0.75rem;
+    margin-left: 0.3rem;
+}
+
+/* Posts */
+.posts-section h2 {
+    font-size: 1rem;
+    color: #999;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.post {
+    background: #12121e;
+    border: 1px solid #1e1e32;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+    transition: border-color 0.2s;
+}
+
+.post:hover {
+    border-color: #6366f1;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+
+.post-source {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.post-source.reddit { background: #ff4500; color: #fff; }
+.post-source.hn { background: #ff6600; color: #fff; }
+
+.sentiment-badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.sentiment-badge.positive { background: #064e3b; color: #4ade80; }
+.sentiment-badge.negative { background: #450a0a; color: #f87171; }
+.sentiment-badge.neutral { background: #1e1e32; color: #888; }
+.sentiment-badge.mixed { background: #422006; color: #fbbf24; }
+
+.post-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.post-title a {
+    color: #e0e0e8;
+    text-decoration: none;
+}
+
+.post-title a:hover {
+    color: #a78bfa;
+}
+
+.post-summary {
+    font-size: 0.85rem;
+    color: #777;
+    margin-bottom: 0.4rem;
+}
+
+.post-meta {
+    font-size: 0.75rem;
+    color: #555;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #1a1a2e;
+    color: #555;
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: #6366f1;
+    text-decoration: none;
+}
+
+@media (max-width: 700px) {
+    .charts {
+        grid-template-columns: 1fr;
+    }
+}

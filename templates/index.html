@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse — Public Sentiment Tracker</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Pulse</h1>
+        <p class="subtitle">Real-time sentiment analysis of AI and health tech discussions</p>
+    </header>
+
+    <main>
+        <!-- Overview Cards -->
+        <section class="cards" id="overview-cards">
+            <div class="card">
+                <span class="card-value" id="total-posts">—</span>
+                <span class="card-label">Posts Tracked</span>
+            </div>
+            <div class="card">
+                <span class="card-value" id="total-analyzed">—</span>
+                <span class="card-label">Analyzed</span>
+            </div>
+            <div class="card positive">
+                <span class="card-value" id="positive-count">—</span>
+                <span class="card-label">Positive</span>
+            </div>
+            <div class="card negative">
+                <span class="card-value" id="negative-count">—</span>
+                <span class="card-label">Negative</span>
+            </div>
+        </section>
+
+        <!-- Charts -->
+        <section class="charts">
+            <div class="chart-container">
+                <h2>Sentiment Trend (7 days)</h2>
+                <canvas id="trend-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h2>Topic Sentiment</h2>
+                <canvas id="topic-chart"></canvas>
+            </div>
+        </section>
+
+        <!-- Top Topics -->
+        <section class="topics-section">
+            <h2>Trending Topics</h2>
+            <div class="topics" id="topics-list"></div>
+        </section>
+
+        <!-- Recent Posts -->
+        <section class="posts-section">
+            <h2>Recent Posts</h2>
+            <div class="posts" id="posts-list"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Pulse — built by <a href="https://github.com/sprotomaxi-cell">Matt Gore</a></p>
+    </footer>
+
+    <script src="/static/js/dashboard.js"></script>
+</body>
+</html>
