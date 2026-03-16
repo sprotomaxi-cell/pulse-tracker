@@ -48,6 +48,8 @@
     --blue-bg: #0a1628;
 }
 
+html { scroll-behavior: smooth; }
+
 body {
     font-family: 'Inter', -apple-system, sans-serif;
     background: var(--bg);
