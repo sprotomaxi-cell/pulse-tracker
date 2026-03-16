@@ -1,68 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pulse — Public Sentiment Tracker</title>
+    <title>Pulse — Sentiment Intelligence</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Pulse</h1>
-        <p class="subtitle">Real-time sentiment analysis of AI and health tech discussions</p>
-    </header>
 
-    <main>
-        <!-- Overview Cards -->
-        <section class="cards" id="overview-cards">
-            <div class="card">
-                <span class="card-value" id="total-posts">—</span>
-                <span class="card-label">Posts Tracked</span>
-            </div>
-            <div class="card">
-                <span class="card-value" id="total-analyzed">—</span>
-                <span class="card-label">Analyzed</span>
-            </div>
-            <div class="card positive">
-                <span class="card-value" id="positive-count">—</span>
-                <span class="card-label">Positive</span>
-            </div>
-            <div class="card negative">
-                <span class="card-value" id="negative-count">—</span>
-                <span class="card-label">Negative</span>
-            </div>
-        </section>
+<!-- Header -->
+<header>
+    <div class="hdr-left">
+        <div class="logo">Pulse</div>
+        <nav class="hdr-nav">
+            <a href="#top" class="nav-item active">Dashboard</a>
+            <a href="#feed-section" class="nav-item">Feed</a>
+            <a href="#topics-section" class="nav-item">Topics</a>
+        </nav>
+    </div>
+    <div class="hdr-right">
+        <span class="hdr-badge blue" id="h-total">— posts</span>
+        <span class="hdr-badge green" id="h-analyzed">— analyzed</span>
+        <button class="theme-toggle" id="theme-btn" title="Toggle dark mode">&#9790;</button>
+        <span class="hdr-time" id="clock"></span>
+    </div>
+</header>
 
-        <!-- Charts -->
-        <section class="charts">
-            <div class="chart-container">
-                <h2>Sentiment Trend (7 days)</h2>
-                <canvas id="trend-chart"></canvas>
-            </div>
-            <div class="chart-container">
-                <h2>Topic Sentiment</h2>
-                <canvas id="topic-chart"></canvas>
-            </div>
-        </section>
+<!-- Metric Cards -->
+<section class="metrics" id="top">
+    <div class="metric green-accent">
+        <div class="metric-top">
+            <span class="metric-label">Positive</span>
+            <span class="metric-pct" id="pct-pos">—%</span>
+        </div>
+        <div class="metric-val green-text" id="v-pos">—</div>
+        <div class="metric-bar"><div class="metric-fill green" id="f-pos"></div></div>
+    </div>
+    <div class="metric red-accent">
+        <div class="metric-top">
+            <span class="metric-label">Negative</span>
+            <span class="metric-pct" id="pct-neg">—%</span>
+        </div>
+        <div class="metric-val red-text" id="v-neg">—</div>
+        <div class="metric-bar"><div class="metric-fill red" id="f-neg"></div></div>
+    </div>
+    <div class="metric neutral-accent">
+        <div class="metric-top">
+            <span class="metric-label">Neutral</span>
+            <span class="metric-pct" id="pct-neu">—%</span>
+        </div>
+        <div class="metric-val neutral-text" id="v-neu">—</div>
+        <div class="metric-bar"><div class="metric-fill neutral" id="f-neu"></div></div>
+    </div>
+    <div class="metric amber-accent">
+        <div class="metric-top">
+            <span class="metric-label">Mixed</span>
+            <span class="metric-pct" id="pct-mix">—%</span>
+        </div>
+        <div class="metric-val amber-text" id="v-mix">—</div>
+        <div class="metric-bar"><div class="metric-fill amber" id="f-mix"></div></div>
+    </div>
+    <div class="metric donut-cell">
+        <canvas id="donut-chart"></canvas>
+    </div>
+</section>
 
-        <!-- Top Topics -->
-        <section class="topics-section">
-            <h2>Trending Topics</h2>
-            <div class="topics" id="topics-list"></div>
-        </section>
+<!-- Charts -->
+<section class="charts-row">
+    <div class="card wide">
+        <div class="card-head">
+            <span class="card-title">Sentiment Trend</span>
+            <span class="card-sub">Last 7 days</span>
+        </div>
+        <div class="chart-body"><canvas id="trend-chart"></canvas></div>
+    </div>
+    <div class="card">
+        <div class="card-head">
+            <span class="card-title">Confidence & Volume</span>
+            <span class="card-sub">Daily avg</span>
+        </div>
+        <div class="chart-body"><canvas id="conf-chart"></canvas></div>
+    </div>
+</section>
 
-        <!-- Recent Posts -->
-        <section class="posts-section">
-            <h2>Recent Posts</h2>
-            <div class="posts" id="posts-list"></div>
-        </section>
-    </main>
+<!-- Bottom: Topics + Breakdown + Feed -->
+<section class="bottom-row">
+    <div class="card" id="topics-section">
+        <div class="card-head">
+            <span class="card-title">Trending Topics</span>
+            <span class="card-count" id="t-count"></span>
+        </div>
+        <div class="card-scroll" id="topics-grid"></div>
+    </div>
 
-    <footer>
-        <p>Pulse — built by <a href="https://github.com/sprotomaxi-cell">Matt Gore</a></p>
-    </footer>
+    <div class="card">
+        <div class="card-head">
+            <span class="card-title">Topic Breakdown</span>
+        </div>
+        <div class="chart-body-sm"><canvas id="topic-chart"></canvas></div>
+    </div>
 
-    <script src="/static/js/dashboard.js"></script>
+    <div class="card" id="feed-section">
+        <div class="card-head">
+            <span class="card-title">Live Feed</span>
+            <span class="card-count" id="f-count"></span>
+        </div>
+        <div class="card-scroll feed-scroll" id="feed"></div>
+    </div>
+</section>
+
+<footer>
+    <span>Pulse v1.0 — Reddit + Hacker News</span>
+    <span class="footer-right">github.com/sprotomaxi-cell</span>
+</footer>
+
+<script src="/static/js/dashboard.js"></script>
 </body>
 </html>

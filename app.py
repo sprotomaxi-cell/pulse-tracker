@@ -147,6 +147,29 @@ def api_topic_sentiment():
     })
 
 
+@app.route("/api/confidence-trend")
+def api_confidence_trend():
+    """Average confidence over time (last 7 days)."""
+    conn = get_conn()
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
+
+    rows = conn.execute(
+        """SELECT DATE(p.created_at) as day, AVG(s.confidence) as avg_conf,
+                  COUNT(*) as vol
+           FROM sentiments s
+           JOIN posts p ON p.id = s.post_id
+           WHERE p.created_at > ?
+           GROUP BY day ORDER BY day""",
+        (cutoff,),
+    ).fetchall()
+    conn.close()
+
+    return jsonify([
+        {"day": r["day"], "confidence": round(r["avg_conf"], 3), "volume": r["vol"]}
+        for r in rows
+    ])
+
+
 if __name__ == "__main__":
     init_db()
     app.run(debug=True, port=5050)
