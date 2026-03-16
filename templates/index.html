@@ -9,110 +9,129 @@
 </head>
 <body>
 
-<!-- Header -->
-<header>
-    <div class="hdr-left">
-        <div class="logo">Pulse</div>
-        <nav class="hdr-nav">
-            <a href="#top" class="nav-item active">Dashboard</a>
-            <a href="#feed-section" class="nav-item">Feed</a>
-            <a href="#topics-section" class="nav-item">Topics</a>
-        </nav>
+<!-- Top Bar -->
+<div class="topbar">
+    <div class="tb-left">
+        <span class="tb-logo">Pulse</span>
+        <a href="#top" class="tb-link active">Dashboard</a>
+        <a href="#trend-section" class="tb-link">Charts</a>
+        <a href="#topics-section" class="tb-link">Topics</a>
+        <a href="#feed-section" class="tb-link">Feed</a>
     </div>
-    <div class="hdr-right">
-        <span class="hdr-badge blue" id="h-total">— posts</span>
-        <span class="hdr-badge green" id="h-analyzed">— analyzed</span>
-        <button class="theme-toggle" id="theme-btn" title="Toggle dark mode">&#9790;</button>
-        <span class="hdr-time" id="clock"></span>
+    <div class="tb-right">
+        <span class="badge blue" id="h-total">—</span>
+        <span class="badge green" id="h-analyzed">—</span>
+        <button class="theme-btn" id="theme-btn">&#9790;</button>
+        <span class="tb-clock" id="clock"></span>
     </div>
-</header>
+</div>
 
-<!-- Metric Cards -->
-<section class="metrics" id="top">
-    <div class="metric green-accent">
-        <div class="metric-top">
-            <span class="metric-label">Positive</span>
-            <span class="metric-pct" id="pct-pos">—%</span>
-        </div>
-        <div class="metric-val green-text" id="v-pos">—</div>
-        <div class="metric-bar"><div class="metric-fill green" id="f-pos"></div></div>
-    </div>
-    <div class="metric red-accent">
-        <div class="metric-top">
-            <span class="metric-label">Negative</span>
-            <span class="metric-pct" id="pct-neg">—%</span>
-        </div>
-        <div class="metric-val red-text" id="v-neg">—</div>
-        <div class="metric-bar"><div class="metric-fill red" id="f-neg"></div></div>
-    </div>
-    <div class="metric neutral-accent">
-        <div class="metric-top">
-            <span class="metric-label">Neutral</span>
-            <span class="metric-pct" id="pct-neu">—%</span>
-        </div>
-        <div class="metric-val neutral-text" id="v-neu">—</div>
-        <div class="metric-bar"><div class="metric-fill neutral" id="f-neu"></div></div>
-    </div>
-    <div class="metric amber-accent">
-        <div class="metric-top">
-            <span class="metric-label">Mixed</span>
-            <span class="metric-pct" id="pct-mix">—%</span>
-        </div>
-        <div class="metric-val amber-text" id="v-mix">—</div>
-        <div class="metric-bar"><div class="metric-fill amber" id="f-mix"></div></div>
-    </div>
-    <div class="metric donut-cell">
-        <canvas id="donut-chart"></canvas>
-    </div>
-</section>
+<!-- App Shell: Sidebar + Main -->
+<div class="app">
 
-<!-- Charts -->
-<section class="charts-row">
-    <div class="card wide">
-        <div class="card-head">
-            <span class="card-title">Sentiment Trend</span>
-            <span class="card-sub">Last 7 days</span>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sb-section">
+            <div class="sb-head">VIEWS</div>
+            <a href="#top" class="sb-item active" data-target="top">Overview</a>
+            <a href="#top" class="sb-item" data-target="top">Snapshot</a>
         </div>
-        <div class="chart-body"><canvas id="trend-chart"></canvas></div>
-    </div>
-    <div class="card">
-        <div class="card-head">
-            <span class="card-title">Confidence & Volume</span>
-            <span class="card-sub">Daily avg</span>
+        <div class="sb-section">
+            <div class="sb-head">DATA</div>
+            <a href="#feed-section" class="sb-item" data-target="feed-section">Live Feed</a>
+            <a href="#topics-section" class="sb-item" data-target="topics-section">Topics</a>
+            <a href="#breakdown-section" class="sb-item" data-target="breakdown-section">Breakdown</a>
         </div>
-        <div class="chart-body"><canvas id="conf-chart"></canvas></div>
-    </div>
-</section>
+        <div class="sb-section">
+            <div class="sb-head">CHARTS</div>
+            <a href="#trend-section" class="sb-item" data-target="trend-section">Sentiment Trend</a>
+            <a href="#conf-section" class="sb-item" data-target="conf-section">Confidence</a>
+            <a href="#source-section" class="sb-item" data-target="source-section">Source Volume</a>
+        </div>
+        <div class="sb-section">
+            <div class="sb-head">SOURCES</div>
+            <div class="sb-item sb-src"><span class="src-dot hn-dot"></span>Hacker News</div>
+            <div class="sb-item sb-src"><span class="src-dot rd-dot"></span>Reddit</div>
+        </div>
+    </aside>
 
-<!-- Bottom: Topics + Breakdown + Feed -->
-<section class="bottom-row">
-    <div class="card" id="topics-section">
-        <div class="card-head">
-            <span class="card-title">Trending Topics</span>
-            <span class="card-count" id="t-count"></span>
-        </div>
-        <div class="card-scroll" id="topics-grid"></div>
-    </div>
+    <!-- Main Content -->
+    <main id="top">
 
-    <div class="card">
-        <div class="card-head">
-            <span class="card-title">Topic Breakdown</span>
+        <!-- Metrics -->
+        <div class="metrics-row">
+            <div class="m-card">
+                <div class="m-top"><span class="m-label">POSITIVE</span><span class="m-pct" id="pct-pos"></span></div>
+                <div class="m-val green" id="v-pos">—</div>
+                <div class="m-bar"><div class="m-fill green" id="f-pos"></div></div>
+            </div>
+            <div class="m-card">
+                <div class="m-top"><span class="m-label">NEGATIVE</span><span class="m-pct" id="pct-neg"></span></div>
+                <div class="m-val red" id="v-neg">—</div>
+                <div class="m-bar"><div class="m-fill red" id="f-neg"></div></div>
+            </div>
+            <div class="m-card">
+                <div class="m-top"><span class="m-label">NEUTRAL</span><span class="m-pct" id="pct-neu"></span></div>
+                <div class="m-val gray" id="v-neu">—</div>
+                <div class="m-bar"><div class="m-fill gray" id="f-neu"></div></div>
+            </div>
+            <div class="m-card">
+                <div class="m-top"><span class="m-label">MIXED</span><span class="m-pct" id="pct-mix"></span></div>
+                <div class="m-val amber" id="v-mix">—</div>
+                <div class="m-bar"><div class="m-fill amber" id="f-mix"></div></div>
+            </div>
+            <div class="m-card m-donut"><canvas id="donut-chart"></canvas></div>
+            <div class="m-card m-stats">
+                <table class="stats-tbl" id="stats-tbl"></table>
+            </div>
         </div>
-        <div class="chart-body-sm"><canvas id="topic-chart"></canvas></div>
-    </div>
 
-    <div class="card" id="feed-section">
-        <div class="card-head">
-            <span class="card-title">Live Feed</span>
-            <span class="card-count" id="f-count"></span>
+        <!-- Charts Row 1 -->
+        <div class="grid-2" id="trend-section">
+            <div class="panel">
+                <div class="p-head"><span>Sentiment Trend</span><span class="p-sub">7 days</span></div>
+                <div class="p-chart"><canvas id="trend-chart"></canvas></div>
+            </div>
+            <div class="panel" id="conf-section">
+                <div class="p-head"><span>Confidence & Volume</span><span class="p-sub">Daily</span></div>
+                <div class="p-chart"><canvas id="conf-chart"></canvas></div>
+            </div>
         </div>
-        <div class="card-scroll feed-scroll" id="feed"></div>
-    </div>
-</section>
+
+        <!-- Charts Row 2 -->
+        <div class="grid-3" id="source-section">
+            <div class="panel">
+                <div class="p-head"><span>Source Distribution</span></div>
+                <div class="p-chart-sm"><canvas id="source-chart"></canvas></div>
+            </div>
+            <div class="panel" id="breakdown-section">
+                <div class="p-head"><span>Topic Breakdown</span></div>
+                <div class="p-chart-sm"><canvas id="topic-chart"></canvas></div>
+            </div>
+            <div class="panel">
+                <div class="p-head"><span>Sentiment by Source</span></div>
+                <div class="p-chart-sm"><canvas id="source-sent-chart"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Topics + Feed -->
+        <div class="grid-2-1" id="topics-section">
+            <div class="panel">
+                <div class="p-head"><span>Trending Topics</span><span class="p-sub" id="t-count"></span></div>
+                <div class="p-scroll" id="topics-grid"></div>
+            </div>
+            <div class="panel" id="feed-section">
+                <div class="p-head"><span>Live Feed</span><span class="p-sub" id="f-count"></span></div>
+                <div class="p-scroll p-feed" id="feed"></div>
+            </div>
+        </div>
+
+    </main>
+</div>
 
 <footer>
     <span>Pulse v1.0 — Reddit + Hacker News</span>
-    <span class="footer-right">github.com/sprotomaxi-cell</span>
+    <span>github.com/sprotomaxi-cell</span>
 </footer>
 
 <script src="/static/js/dashboard.js"></script>
